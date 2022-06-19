@@ -39,6 +39,7 @@ CORS_ALLOWED_ORIGINS = [
 
 INSTALLED_APPS = [
     'labels.apps.LabelsConfig',
+    'products.apps.ProductsConfig',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
