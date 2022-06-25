@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from products.models import Product, State, StateProduct
-from products.serializers import ProductSerializer, StateSerializer, StateProductSerializer
+from products.serializers import ProductSerializer, StateSerializer, StateProductSerializer, StateProductCreateSerializer
 
 @api_view(['GET', 'POST'])
 def product_list(request, format=None):
@@ -38,12 +38,12 @@ def state_products(request, format=None):
         # return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(stat.data)
 
-    # elif request.method == 'POST':
-    #     serializer = ProductSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status_HTTP_404_BAD_REQUEST)
+    elif request.method == 'POST':
+        serializer = StateProductCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response("success", status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status_HTTP_404_BAD_REQUEST)
 
 # @api_view(['GET', 'PUT', 'DELETE'])
 # def label_detail(request, pk, format=None):
